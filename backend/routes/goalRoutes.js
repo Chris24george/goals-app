@@ -6,9 +6,10 @@ import {
 	updateGoal,
 	deleteGoal,
 } from '../controllers/goalController.js';
+import { protect } from '../middleware/authMiddleware.js';
 
-router.route('/').get(getGoals).post(setGoal);
+router.route('/').get(protect, getGoals).post(protect, setGoal);
 
-router.route('/:id').put(updateGoal).delete(deleteGoal);
+router.route('/:id').put(protect, updateGoal).delete(protect, deleteGoal);
 
 export default router;
