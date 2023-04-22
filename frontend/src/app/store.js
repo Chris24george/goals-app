@@ -3,8 +3,8 @@ import authReducer from '../features/auth/authSlice.js';
 import goalReducer from '../features/goals/goalSlice.js';
 
 export const store = configureStore({
-	reducer: {
-		auth: authReducer,
-		goals: goalReducer,
-	},
+  reducer: {
+    auth: authReducer,
+    goals: goalReducer,
+  },
 });
