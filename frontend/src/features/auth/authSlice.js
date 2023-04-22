@@ -31,13 +31,22 @@ export const register = createAsyncThunk(
 );
 
 // log out user
-export const logout = createAsyncThunk('auth/logout', async () => {
-	await authService.logout();
+export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+	try {
+		await authService.logout();
+	} catch (error) {
+		const message =
+			(error.response && error.response.data && error.response.data.message) ||
+			error.message ||
+			error.toString();
+		return thunkAPI.rejectWithValue(message);
+	}
 });
 
 // login user
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
 	try {
+		console.log('in login user');
 		return await authService.login(user);
 	} catch (error) {
 		const message =
